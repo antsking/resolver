@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "sudo PORT=80 forever start -c babel-node ./bin/www",
+    "start": "sudo PORT=80 NODE_ENV=production forever start -c babel-node ./bin/www",
     "stop": "sudo forever stop ./bin/www"
   },
   "dependencies": {

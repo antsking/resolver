@@ -53,9 +53,13 @@ const api = new ParseServer({
 // Serve the Parse API on the /parse URL prefix
 app.use('/parse', api);
 
-app.listen(SERVER_PORT, function() {
-    console.log(`Parse server is running on port ${SERVER_HOST}` );
-});
+if(IS_DEVELOPMENT){
+    app.listen(SERVER_PORT, function() {
+        console.log(`Parse server is running on port ${SERVER_HOST}` );
+    });
+}
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

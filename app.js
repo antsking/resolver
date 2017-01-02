@@ -10,6 +10,23 @@ var users = require('./routes/users');
 
 var app = express();
 
+var ParseServer = require('parse-server').ParseServer;
+
+//Parse Server
+var api = new ParseServer({
+    databaseURI: 'mongodb://resolveruser:developer@ds037262.mlab.com:37262/resolver', // Connection string for your MongoDB database
+    appId: 'resolver-app-2017',
+    masterKey: 'developer', // Keep this key secret!
+    serverURL: 'http://localhost:1337/parse' // Don't forget to change to https if needed
+});
+
+// Serve the Parse API on the /parse URL prefix
+app.use('/parse', api);
+
+app.listen(1337, function() {
+    console.log('parse-server-example running on port 1337.');
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

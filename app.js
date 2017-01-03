@@ -31,12 +31,12 @@ const index = require('./routes/index');
 const users = require('./routes/users');
 
 //setting
-const SERVER_PORT = process.env.PORT || 1337;
+const PARSE_PORT = process.env.PARSE_PORT || 1337;
 const SERVER_HOST = process.env.HOST || 'localhost';
 const APP_ID = process.env.APP_ID || 'resolver-app-2017';
 const MASTER_KEY = process.env.MASTER_KEY || '3xgjpsvx75gimoin48fegy3l8774xd760dgvbhy8';
 const DATABASE_URI = process.env.DATABASE_URI || 'mongodb://resolveruser:developer@ds037262.mlab.com:37262/resolver';
-const IS_DEVELOPMENT = process.env.NODE_ENV !== 'production';
+
 
 //express
 const app = express();
@@ -47,17 +47,16 @@ const api = new ParseServer({
     databaseURI: DATABASE_URI, // Connection string for your MongoDB database
     appId: APP_ID,
     masterKey: MASTER_KEY, // Keep this key secret!
-    serverURL: `http://localhost:${SERVER_PORT}/parse` // Don't forget to change to https if needed
+    serverURL: `http://${SERVER_HOST}:${PARSE_PORT}/parse` // Don't forget to change to https if needed
 });
 
 // Serve the Parse API on the /parse URL prefix
 app.use('/parse', api);
 
-if(IS_DEVELOPMENT){
-    app.listen(SERVER_PORT, function() {
-        console.log(`Parse server is running on port ${SERVER_HOST}` );
-    });
-}
+app.listen(PARSE_PORT, function() {
+    console.log(`Parse server is running on port ${PARSE_PORT}` );
+});
+
 
 
 
